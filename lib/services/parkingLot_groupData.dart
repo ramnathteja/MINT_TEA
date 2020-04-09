@@ -1,5 +1,5 @@
 import 'package:http/http.dart';
-import 'dart:convert';
+
 
 class ParkingLotGroupData {
 
@@ -10,6 +10,7 @@ class ParkingLotGroupData {
     } catch (e) {
       print('caught exception $e');
       String data = 'set current state to previous known state';
+      print(data);
     }
   }
 
