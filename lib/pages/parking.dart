@@ -3,33 +3,29 @@ import 'package:mint_tea/pages/parkinglot_2a.dart';
 import 'package:mint_tea/pages/parkinglot_3a.dart';
 import 'parkinglot_1a.dart';
 
-class Parking extends StatefulWidget {
-  @override
-  _ParkingState createState() => _ParkingState();
-}
-
-class _ParkingState extends State<Parking> {
+class Parking extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            ParkingLot3A(),
-            Divider(
-              color: Colors.red,
-            ),
-            SizedBox(height: 10.0,),
-            ParkingLot2A(),
-            SizedBox(height: 10.0,),
-            Divider(
-              color: Colors.red,
-            ),
-            ParkingLot1A(),
-          ],
-        ),
+      appBar: AppBar(
+        title: Text('Korea Electronic Technology Institute'),
+        centerTitle: true,
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              ParkingLot1A(),
+              ParkingLot2A(),
+              // ParkingLot3A(),
+            ],
+          ),
+        ],
       ),
     );
   }
 }
-

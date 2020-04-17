@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
-
 class ParkingLot3A extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       //1A
       children: <Widget>[
-        Column(
+        Row(
           children: <Widget>[
-            Row(
+            Column(
               children: <Widget>[
                 Icon(Icons.directions_car),
                 Icon(Icons.directions_car),
@@ -22,9 +21,9 @@ class ParkingLot3A extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 150.0,
+              width: 150.0,
             ),
-            Row(
+            Column(
               children: <Widget>[
                 Icon(
                   Icons.directions_car,
@@ -42,22 +41,22 @@ class ParkingLot3A extends StatelessWidget {
           ],
         ),
         SizedBox(
-          width: 40.0,
+          height: 40.0,
         ),
-        Column(
+        Row(
           children: <Widget>[
             Icon(Icons.directions_car),
-            SizedBox(
-              height: 120.0,
-            ),
             Icon(Icons.directions_car),
+            SizedBox(
+              width: 120.0,
+            ),
             Icon(Icons.directions_car),
           ],
         ),
         SizedBox(
-          width: 120.0,
+          height: 120.0,
         ),
-        Column(
+        Row(
           children: <Widget>[
             Transform.rotate(
               angle: 3.1415926535897932 / 2,
