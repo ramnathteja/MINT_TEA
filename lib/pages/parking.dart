@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mint_tea/pages/parkinglot_2a.dart';
-import 'package:mint_tea/pages/parkinglot_3a.dart';
-import 'parkinglot_1a.dart';
+import 'package:mint_tea/environment.dart';
+import 'package:mint_tea/pages/parkinglotA.dart';
+import 'package:mint_tea/pages/parkinglotB.dart';
+import 'package:mint_tea/pages/parkinglotC.dart';
+import 'package:mint_tea/pages/parkinglotD.dart';
+import 'package:mint_tea/pages/parkinglotE.dart';
 
 class Parking extends StatelessWidget {
   @override
@@ -19,9 +22,23 @@ class Parking extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              ParkingLot1A(),
-              ParkingLot2A(),
-              // ParkingLot3A(),
+              ParkingLotA(),
+              SizedBox(
+                width: Environment.spacing_BTW_Container,
+              ),
+              ParkingLotB(),
+              SizedBox(
+                width: Environment.spacing_BTW_Container,
+              ),
+              ParkingLotC(),
+              SizedBox(
+                width: Environment.spacing_BTW_Container,
+              ),
+              ParkingLotD(),
+              SizedBox(
+                width: Environment.spacing_BTW_Container,
+              ),
+              ParkingLotE(),
             ],
           ),
         ],
