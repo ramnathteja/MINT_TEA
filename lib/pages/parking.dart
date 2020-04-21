@@ -5,6 +5,7 @@ import 'package:mint_tea/pages/parkinglotB.dart';
 import 'package:mint_tea/pages/parkinglotC.dart';
 import 'package:mint_tea/pages/parkinglotD.dart';
 import 'package:mint_tea/pages/parkinglotE.dart';
+import 'package:mint_tea/pages/workBuilding.dart';
 
 class Parking extends StatelessWidget {
   @override
@@ -38,7 +39,13 @@ class Parking extends StatelessWidget {
               SizedBox(
                 width: Environment.spacing_BTW_Container,
               ),
-              ParkingLotE(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  WorkBuilding(),
+                  ParkingLotE(),
+                ],
+              ),
             ],
           ),
         ],

@@ -34,15 +34,15 @@ class _ParkingLotEState extends State<ParkingLotE> {
   @override
   Widget build(BuildContext context) {
     List<Widget> tempRowA =
-        ParkingListWidget().getParkingLotList(128, 140, data);
+        ParkingListWidget().getParkingLotList(128, 136, data);
     List<Widget> tempRowB =
-        ParkingListWidget().getParkingLotList(132, 143, data);
+        ParkingListWidget().getParkingLotList(137, 143, data);
 
     for (int i = 0; i < tempRowA.length; i++) {
       tempRowA.insert(
           i + 1,
           SizedBox(
-            width: 10.0,
+            width: 20.0,
           ));
       i = i + 1;
     }
@@ -50,7 +50,7 @@ class _ParkingLotEState extends State<ParkingLotE> {
       tempRowB.insert(
           i + 1,
           SizedBox(
-            width: 10.0,
+            width: 20.0,
           ));
       i = i + 1;
     }
