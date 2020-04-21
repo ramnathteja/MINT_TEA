@@ -22,6 +22,7 @@ class ParkingLotGroupData {
         groupData.add(ParkingSpotModel(
             id: id, resourceName: resourceName, status: status));
       });
+      print('length of groupData ${groupData.length}');
       return groupData;
     } catch (e) {
       print('caught exception $e');
