@@ -8,8 +8,8 @@ class Environment {
   static const String lotC_URL = 'http://125.138.177.86:7599/wdc_base/KETIParkingGroup7/fopt';
   static const String lotD_URL = 'http://125.138.177.86:7599/wdc_base/KETIParkingGroup6/fopt';
   static const String lotE_URL = 'http://125.138.177.86:7599/wdc_base/KETIParkingGroup5/fopt';
-  static const String lotF_URL = '';
-  static const String lotG_URL = '';
-  static const String lotH_URL = '';
+  static const String lotF_URL = 'http://125.138.177.86:7599/wdc_base/KETIParkingGroup1/fopt';
+  static const String lotG_URL = 'http://125.138.177.86:7599/wdc_base/KETIParkingGroup2/fopt';
+  static const String lotH_URL = 'http://125.138.177.86:7599/wdc_base/KETIParkingGroup3/fopt';
 
 }

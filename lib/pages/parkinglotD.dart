@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mint_tea/models/parkingSpotModel.dart';
 import 'package:mint_tea/services/parkingListWidget.dart';
 import 'package:mint_tea/services/parkingLot_groupData.dart';
+import 'package:mint_tea/size_config.dart';
 
 import '../environment.dart';
 
@@ -44,7 +45,7 @@ List<ParkingSpotModel> data = new List<ParkingSpotModel>();
               children: ParkingListWidget().getParkingLotList(156, 163, data),
             ),
             SizedBox(
-              height: 40.0,
+              height: SizeConfig.blockSizeVertical*2,//40.0
             ),
             Column(
               children: ParkingListWidget().getParkingLotList(164, 168, data),
@@ -52,7 +53,7 @@ List<ParkingSpotModel> data = new List<ParkingSpotModel>();
           ],
         ),
         SizedBox(
-          width: 35.0,
+          width: SizeConfig.blockSizeHorizontal*1.5,//35.0
         ),
         Column(
           children: <Widget>[
@@ -60,7 +61,7 @@ List<ParkingSpotModel> data = new List<ParkingSpotModel>();
               children: ParkingListWidget().getParkingLotList(144, 147, data),
             ),
             SizedBox(
-              height: 40.0,
+              height: SizeConfig.blockSizeVertical*2,//40.0
             ),
             Column(
               children: ParkingListWidget().getParkingLotList(148, 155, data),

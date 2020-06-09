@@ -8,12 +8,12 @@ import 'package:mint_tea/size_config.dart';
 
 import '../environment.dart';
 
-class ParkingLotE extends StatefulWidget {
+class ParkingLotG extends StatefulWidget {
   @override
-  _ParkingLotEState createState() => _ParkingLotEState();
+  _ParkingLotGState createState() => _ParkingLotGState();
 }
 
-class _ParkingLotEState extends State<ParkingLotE> {
+class _ParkingLotGState extends State<ParkingLotG> {
   List<ParkingSpotModel> data = new List<ParkingSpotModel>();
 
   @override
@@ -23,7 +23,7 @@ class _ParkingLotEState extends State<ParkingLotE> {
     Timer.periodic(Environment.requestCyclePeriod, (timer) async {
       ParkingLotGroupData parkingData = new ParkingLotGroupData();
       List<ParkingSpotModel> _data = new List<ParkingSpotModel>();
-      _data = await parkingData.getGroupData(Environment.lotE_URL);
+      _data = await parkingData.getGroupData(Environment.lotG_URL);
       if (_data.isNotEmpty) {
         setState(() {
           data = _data;
@@ -31,43 +31,35 @@ class _ParkingLotEState extends State<ParkingLotE> {
       }
     });
   }
-
   @override
   Widget build(BuildContext context) {
-    List<Widget> tempRowA =
-        ParkingListWidget().getParkingLotList(128, 136, data);
-    List<Widget> tempRowB =
-        ParkingListWidget().getParkingLotList(137, 143, data);
-
-    for (int i = 0; i < tempRowA.length; i++) {
-      tempRowA.insert(
-          i + 1,
-          SizedBox(
-            width: SizeConfig.blockSizeHorizontal*1,//20.0
-          ));
-      i = i + 1;
-    }
-    for (int i = 0; i < tempRowB.length; i++) {
-      tempRowB.insert(
-          i + 1,
-          SizedBox(
-            width: SizeConfig.blockSizeHorizontal*1,//20.0
-          ));
-      i = i + 1;
-    }
-
-    return Column(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
-        Row(
-          //2A
-          children: tempRowA,
+        Column(
+          children: ParkingListWidget().getParkingLotList(81, 94, data),
         ),
         SizedBox(
-          height: SizeConfig.blockSizeVertical*1,//20.0
+          width: SizeConfig.blockSizeHorizontal*1,
         ),
-        Row(
-          children: tempRowB,
+        Column(
+          children: ParkingListWidget().getParkingLotList(67, 80, data),
+        ),
+        SizedBox(
+          width: SizeConfig.blockSizeHorizontal*2,
+        ),
+        Column(
+          children: <Widget>[
+            Column(
+              children: ParkingListWidget().getParkingLotList(58, 66, data),
+            ),
+            SizedBox(
+              height: SizeConfig.blockSizeVertical*4,
+            ),
+            Column(
+              children: ParkingListWidget().getParkingLotList(52, 57, data),
+            ),
+          ],
         ),
       ],
     );

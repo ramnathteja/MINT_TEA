@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mint_tea/size_config.dart';
 
 class WorkBuilding extends StatelessWidget {
   @override
@@ -9,20 +10,38 @@ class WorkBuilding extends StatelessWidget {
         Container(
           margin: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
           color: Colors.red[600],
-          width: 210.0,
-          height: 48.0,
+          width: SizeConfig.blockSizeHorizontal * 21.0,
+          height: SizeConfig.blockSizeVertical * 4.8,
         ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 30.0),
-          color: Colors.red[600],
-          height: 300.0,
-          width: 48.0,
-        ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
-          color: Colors.red[600],
-          width: 200.0,
-          height: 48.0,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              margin: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 30.0),
+              color: Colors.red[600],
+              height: SizeConfig.blockSizeVertical * 43.50,
+              width: SizeConfig.blockSizeHorizontal * 2.80,
+            ),
+            Column(
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
+                  color: Colors.red[600],
+                  width: SizeConfig.blockSizeHorizontal * 20.0,
+                  height: SizeConfig.blockSizeVertical * 4.8,
+                ),
+                SizedBox(
+                  height: SizeConfig.blockSizeVertical * 30.9,
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
+                  color: Colors.red[600],
+                  width: SizeConfig.blockSizeHorizontal * 20.0,
+                  height: SizeConfig.blockSizeVertical * 4.8,
+                ),
+              ],
+            ),
+          ],
         ),
       ],
     );
