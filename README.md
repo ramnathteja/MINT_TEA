@@ -1,6 +1,6 @@
 # mint_tea
 
-A new Flutter project.
+A Parking Lot Flutter project.
 
 ## Getting Started
 
