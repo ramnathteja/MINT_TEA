@@ -1,9 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:mint_tea/models/parkingSpotModel.dart';
+import 'package:mint_tea/pages/loading.dart';
+import 'package:mint_tea/services/mqttClientWrapper.dart';
 import 'package:mint_tea/services/parkingListWidget.dart';
-import 'package:mint_tea/services/parkingLot_groupData.dart';
+import 'package:provider/provider.dart';
 
 import '../environment.dart';
 
@@ -13,27 +12,68 @@ class ParkingLotH extends StatefulWidget {
 }
 
 class _ParkingLotHState extends State<ParkingLotH> {
-  List<ParkingSpotModel> data = new List<ParkingSpotModel>();
-
-  @override
-  void initState() {
-    super.initState();
-    // print('init state was called');
-    Timer.periodic(Environment.requestCyclePeriod, (timer) async {
-      ParkingLotGroupData parkingData = new ParkingLotGroupData();
-      List<ParkingSpotModel> _data = new List<ParkingSpotModel>();
-      _data = await parkingData.getGroupData(Environment.lotH_URL);
-      if (_data.isNotEmpty) {
-        setState(() {
-          data = _data;
-        });
-      }
-    });
-  }
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: ParkingListWidget().getParkingLotList(95, 114, data),
+    final notificationHandler = context.watch<MQTTClientWrapper>();
+    Map data = notificationHandler.spaceH;
+    return Container(
+      child: (data == null)
+          ? Loading()
+          : Row(
+              children: [
+                Column(
+                  children: [
+                    Column(
+                      children: [
+                        SizedBox(
+                          height: 2 * Environment.maxMeasurement,
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: (ParkingListWidget()
+                              .getParkingLotList(69, 82, 1.6, data))
+                          .reversed
+                          .toList(),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Column(
+                      children: [
+                        SizedBox(
+                          height: 2 * Environment.maxMeasurement,
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: ParkingListWidget()
+                          .getParkingLotList(29, 42, 1.6, data),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Column(
+                      children: (ParkingListWidget()
+                              .getParkingLotList(20, 28, 1.6, data))
+                          .reversed
+                          .toList(),
+                    ),
+                    SizedBox(
+                      height: Environment.maxMeasurement,
+                    ),
+                    Column(
+                      children: (ParkingListWidget()
+                              .getParkingLotList(14, 19, 1.6, data))
+                          .reversed
+                          .toList(),
+                    )
+                  ],
+                ),
+              ],
+            ),
     );
   }
 }

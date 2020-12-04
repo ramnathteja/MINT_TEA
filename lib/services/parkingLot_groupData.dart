@@ -1,11 +1,12 @@
 import 'dart:convert';
+import 'dart:developer' as developer;
 import 'package:http/http.dart';
-import 'package:mint_tea/models/parkingSpotModel.dart';
 
 class ParkingLotGroupData {
-  List<ParkingSpotModel> groupData = new List<ParkingSpotModel>();
+  // List<ParkingSpotModel> groupData = new List<ParkingSpotModel>();
+  var makeThisDataAMap = new Map();
 
-  Future<List<ParkingSpotModel>> getGroupData(String url) async {
+  Future<Map> getGroupData(String url) async {
     try {
       Map<String, String> requestHeaders = {
         'X-M2M-Origin': 'S20170717074825768bp2l',
@@ -19,15 +20,15 @@ class ParkingLotGroupData {
         String resourceName = item['pc']['sc:parkingSpot']['rn'];
         int id = int.parse(resourceName.substring('parkingSpot_'.length));
         String status = item['pc']['sc:parkingSpot']['status'];
-        groupData.add(ParkingSpotModel(
-            id: id, resourceName: resourceName, status: status));
+        makeThisDataAMap[id] = status;
       });
-      print('length of groupData ${groupData.length}');
-      return groupData;
+      // print(makeThisDataAMap);
+      return makeThisDataAMap;
     } catch (e) {
-      print('caught exception $e');
+      developer.log('caught exception $e',
+          name: "parkingLot_groupData", time: DateTime.now());
       print('set current state to previous known state');
-      return groupData;
+      return makeThisDataAMap;
     }
   }
 }

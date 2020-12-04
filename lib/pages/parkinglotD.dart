@@ -1,10 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:mint_tea/models/parkingSpotModel.dart';
+import 'package:mint_tea/pages/loading.dart';
+import 'package:mint_tea/services/mqttClientWrapper.dart';
 import 'package:mint_tea/services/parkingListWidget.dart';
-import 'package:mint_tea/services/parkingLot_groupData.dart';
-import 'package:mint_tea/size_config.dart';
+import 'package:provider/provider.dart';
 
 import '../environment.dart';
 
@@ -14,61 +12,53 @@ class ParkingLotD extends StatefulWidget {
 }
 
 class _ParkingLotDState extends State<ParkingLotD> {
-List<ParkingSpotModel> data = new List<ParkingSpotModel>();
-
-  @override
-  void initState() {
-    super.initState();
-    // print('init state was called');
-    Timer.periodic(Environment.requestCyclePeriod, (timer) async {
-      ParkingLotGroupData parkingData = new ParkingLotGroupData();
-      List<ParkingSpotModel> _data = new List<ParkingSpotModel>();
-      _data = await parkingData.getGroupData(Environment.lotD_URL);
-      if (_data.isNotEmpty) {
-        setState(() {
-          data = _data;
-        });
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          //2A
-          children: <Widget>[
-            Column(
-              children: ParkingListWidget().getParkingLotList(156, 163, data),
+    final notificationHandler = context.watch<MQTTClientWrapper>();
+    Map data = notificationHandler.spaceD;
+    return Container(
+      child: (data == null)
+          ? Loading()
+          : Row(
+              children: [
+                Column(
+                  children: [
+                    Column(
+                      children: ParkingListWidget()
+                          .getParkingLotList(151, 158, 1.6, data),
+                    ),
+                    SizedBox(
+                      height: Environment.maxMeasurement,
+                    ),
+                    Column(
+                      children: ParkingListWidget()
+                          .getParkingLotList(159, 163, 1.6, data),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: 3 * Environment.minMeasurement,
+                ),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: Environment.maxMeasurement,
+                    ),
+                    Column(
+                      children: ParkingListWidget()
+                          .getParkingLotList(140, 142, 1.6, data),
+                    ),
+                    SizedBox(
+                      height: 3 * Environment.minMeasurement,
+                    ),
+                    Column(
+                      children: ParkingListWidget()
+                          .getParkingLotList(143, 150, 1.6, data),
+                    )
+                  ],
+                ),
+              ],
             ),
-            SizedBox(
-              height: SizeConfig.blockSizeVertical*2,//40.0
-            ),
-            Column(
-              children: ParkingListWidget().getParkingLotList(164, 168, data),
-            ),
-          ],
-        ),
-        SizedBox(
-          width: SizeConfig.blockSizeHorizontal*1.5,//35.0
-        ),
-        Column(
-          children: <Widget>[
-            Column(
-              children: ParkingListWidget().getParkingLotList(144, 147, data),
-            ),
-            SizedBox(
-              height: SizeConfig.blockSizeVertical*2,//40.0
-            ),
-            Column(
-              children: ParkingListWidget().getParkingLotList(148, 155, data),
-            ),
-          ],
-        ),
-      ],
     );
   }
 }

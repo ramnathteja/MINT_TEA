@@ -1,10 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:mint_tea/models/parkingSpotModel.dart';
+import 'package:mint_tea/pages/loading.dart';
+import 'package:mint_tea/services/mqttClientWrapper.dart';
 import 'package:mint_tea/services/parkingListWidget.dart';
-import 'package:mint_tea/services/parkingLot_groupData.dart';
-import 'package:mint_tea/size_config.dart';
+import 'package:provider/provider.dart';
 
 import '../environment.dart';
 
@@ -14,144 +12,196 @@ class ParkingLotF extends StatefulWidget {
 }
 
 class _ParkingLotFState extends State<ParkingLotF> {
-  List<ParkingSpotModel> data = new List<ParkingSpotModel>();
-
-  @override
-  void initState() {
-    super.initState();
-    // print('init state was called');
-    Timer.periodic(Environment.requestCyclePeriod, (timer) async {
-      ParkingLotGroupData parkingData = new ParkingLotGroupData();
-      List<ParkingSpotModel> _data = new List<ParkingSpotModel>();
-      _data = await parkingData.getGroupData(Environment.lotF_URL);
-      if (_data.isNotEmpty) {
-        setState(() {
-          data = _data;
-        });
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: <Widget>[
-        Column(
-              children: <Widget>[
+    final notificationHandler = context.watch<MQTTClientWrapper>();
+    Map data = notificationHandler.spaceF;
+    return Container(
+      child: (data == null)
+          ? Loading()
+          : Row(
+              children: [
                 Column(
-                  children: ParkingListWidget().getParkingLotList(46, 51, data),
+                  children: [
+                    SizedBox(
+                      height: 7 * Environment.maxMeasurement,
+                    ),
+                    Column(
+                      children: ParkingListWidget()
+                          .getParkingLotList(125, 125, 1.5, data),
+                    ),
+                  ],
                 ),
                 SizedBox(
-                  height: SizeConfig.blockSizeVertical*8.5,
+                  width: Environment.minMeasurement,
                 ),
                 Column(
-                  children: ParkingListWidget().getParkingLotList(44, 45, data),
+                  children: [
+                    SizedBox(
+                      height: 6.5 * Environment.maxMeasurement,
+                    ),
+                    Column(
+                      children: ParkingListWidget()
+                          .getParkingLotList(124, 124, 1.4, data),
+                    ),
+                  ],
                 ),
                 SizedBox(
-                  height: SizeConfig.blockSizeVertical*1,
+                  width: Environment.minMeasurement,
                 ),
                 Column(
-                  children: ParkingListWidget().getParkingLotList(42, 43, data),
-                ),
-              ]
-            ),
-            SizedBox(
-              width: SizeConfig.blockSizeHorizontal*4,
-            ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                Column(
-                  children: ParkingListWidget().getParkingLotList(39, 41, data),
+                  children: [
+                    SizedBox(
+                      height: 6 * Environment.maxMeasurement,
+                    ),
+                    Column(
+                      children: ParkingListWidget()
+                          .getParkingLotList(123, 123, 1.3, data),
+                    ),
+                  ],
                 ),
                 SizedBox(
-                  height: SizeConfig.blockSizeVertical*1,
+                  width: Environment.minMeasurement,
                 ),
                 Column(
-                  children: ParkingListWidget().getParkingLotList(33, 38, data),
+                  children: [
+                    SizedBox(
+                      height: 5.5 * Environment.maxMeasurement,
+                    ),
+                    Column(
+                      children: ParkingListWidget()
+                          .getParkingLotList(122, 122, 1.2, data),
+                    ),
+                  ],
                 ),
                 SizedBox(
-                  height: SizeConfig.blockSizeVertical*1,
+                  width: Environment.minMeasurement,
                 ),
                 Column(
-                  children: ParkingListWidget().getParkingLotList(31, 32, data),
+                  children: [
+                    SizedBox(
+                      height: 5 * Environment.maxMeasurement,
+                    ),
+                    Column(
+                      children: ParkingListWidget()
+                          .getParkingLotList(121, 121, 1.1, data),
+                    ),
+                  ],
                 ),
                 SizedBox(
-                  height: SizeConfig.blockSizeVertical*1,
+                  width: Environment.minMeasurement,
                 ),
                 Column(
-                  children: ParkingListWidget().getParkingLotList(29, 30, data),
+                  children: [
+                    SizedBox(
+                      height: 4.5 * Environment.maxMeasurement,
+                    ),
+                    Column(
+                      children: ParkingListWidget()
+                          .getParkingLotList(120, 120, 1.0, data),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: Environment.minMeasurement,
+                ),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 4 * Environment.maxMeasurement,
+                    ),
+                    Column(
+                      children: ParkingListWidget()
+                          .getParkingLotList(119, 119, 0.9, data),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: Environment.minMeasurement,
+                ),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 3.5 * Environment.maxMeasurement,
+                    ),
+                    Column(
+                      children: ParkingListWidget()
+                          .getParkingLotList(118, 118, 0.9, data),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: Environment.minMeasurement,
+                ),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 3 * Environment.maxMeasurement,
+                    ),
+                    Column(
+                      children: ParkingListWidget()
+                          .getParkingLotList(117, 117, 0.9, data),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: Environment.minMeasurement,
+                ),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 2.5 * Environment.maxMeasurement,
+                    ),
+                    Column(
+                      children: ParkingListWidget()
+                          .getParkingLotList(116, 116, 1.2, data),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: Environment.minMeasurement,
+                ),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 2 * Environment.maxMeasurement,
+                    ),
+                    Column(
+                      children: ParkingListWidget()
+                          .getParkingLotList(115, 115, 1.4, data),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: Environment.minMeasurement,
+                ),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 1.5 * Environment.maxMeasurement,
+                    ),
+                    Column(
+                      children: ParkingListWidget()
+                          .getParkingLotList(114, 114, 1.5, data),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: Environment.minMeasurement,
+                ),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: Environment.maxMeasurement,
+                    ),
+                    Column(
+                      children: ParkingListWidget()
+                          .getParkingLotList(113, 113, 1.6, data),
+                    ),
+                  ],
                 ),
               ],
             ),
-            SizedBox(
-              width: SizeConfig.blockSizeHorizontal*1,
-            ),
-            Column(
-              children: <Widget>[
-                Column(
-                  children: ParkingListWidget().getParkingLotList(26, 28, data),
-                ),
-                SizedBox(
-                  height: SizeConfig.blockSizeVertical*1,
-                ),
-                Column(
-                  children: ParkingListWidget().getParkingLotList(20, 25, data),
-                ),
-                SizedBox(
-                  height: SizeConfig.blockSizeVertical*1,
-                ),
-                Column(
-                  children: ParkingListWidget().getParkingLotList(18, 19, data),
-                ),
-                SizedBox(
-                  height: SizeConfig.blockSizeVertical*1,
-                ),
-                Column(
-                  children: ParkingListWidget().getParkingLotList(16, 17, data),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: SizeConfig.blockSizeHorizontal*2,
-            ),
-            Column(
-              children: <Widget>[
-                Column(
-                  children: ParkingListWidget().getParkingLotList(13, 15, data),
-                ),
-                SizedBox(
-                  height: SizeConfig.blockSizeVertical*1,
-                ),
-                Column(
-                  children: ParkingListWidget().getParkingLotList(7, 12, data),
-                ),
-                SizedBox(
-                  height: SizeConfig.blockSizeVertical*1,
-                ),
-                Column(
-                  children: ParkingListWidget().getParkingLotList(5, 6, data),
-                ),
-                SizedBox(
-                  height: SizeConfig.blockSizeVertical*1,
-                ),
-                Column(
-                  children: ParkingListWidget().getParkingLotList(3, 4, data),
-                ),
-                SizedBox(
-                  height: SizeConfig.blockSizeVertical*1,
-                ),
-                Column(
-                  children: ParkingListWidget().getParkingLotList(1, 2, data),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
     );
   }
 }

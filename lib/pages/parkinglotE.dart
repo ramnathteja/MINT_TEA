@@ -1,12 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:mint_tea/models/parkingSpotModel.dart';
+import 'package:mint_tea/pages/loading.dart';
+import 'package:mint_tea/services/mqttClientWrapper.dart';
 import 'package:mint_tea/services/parkingListWidget.dart';
-import 'package:mint_tea/services/parkingLot_groupData.dart';
-import 'package:mint_tea/size_config.dart';
-
-import '../environment.dart';
+import 'package:provider/provider.dart';
 
 class ParkingLotE extends StatefulWidget {
   @override
@@ -14,62 +10,29 @@ class ParkingLotE extends StatefulWidget {
 }
 
 class _ParkingLotEState extends State<ParkingLotE> {
-  List<ParkingSpotModel> data = new List<ParkingSpotModel>();
-
-  @override
-  void initState() {
-    super.initState();
-    // print('init state was called');
-    Timer.periodic(Environment.requestCyclePeriod, (timer) async {
-      ParkingLotGroupData parkingData = new ParkingLotGroupData();
-      List<ParkingSpotModel> _data = new List<ParkingSpotModel>();
-      _data = await parkingData.getGroupData(Environment.lotE_URL);
-      if (_data.isNotEmpty) {
-        setState(() {
-          data = _data;
-        });
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    List<Widget> tempRowA =
-        ParkingListWidget().getParkingLotList(128, 136, data);
-    List<Widget> tempRowB =
-        ParkingListWidget().getParkingLotList(137, 143, data);
-
-    for (int i = 0; i < tempRowA.length; i++) {
-      tempRowA.insert(
-          i + 1,
-          SizedBox(
-            width: SizeConfig.blockSizeHorizontal*1,//20.0
-          ));
-      i = i + 1;
-    }
-    for (int i = 0; i < tempRowB.length; i++) {
-      tempRowB.insert(
-          i + 1,
-          SizedBox(
-            width: SizeConfig.blockSizeHorizontal*1,//20.0
-          ));
-      i = i + 1;
-    }
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: <Widget>[
-        Row(
-          //2A
-          children: tempRowA,
-        ),
-        SizedBox(
-          height: SizeConfig.blockSizeVertical*1,//20.0
-        ),
-        Row(
-          children: tempRowB,
-        ),
-      ],
+    final notificationHandler = context.watch<MQTTClientWrapper>();
+    Map data = notificationHandler.spaceE;
+    return Container(
+      child: (data == null)
+          ? Loading()
+          : Column(
+              children: [
+                Row(
+                  children: (ParkingListWidget()
+                          .getParkingLotList(126, 133, 1.6, data))
+                      .reversed
+                      .toList(),
+                ),
+                Row(
+                  children: (ParkingListWidget()
+                          .getParkingLotList(134, 139, 1.6, data))
+                      .reversed
+                      .toList(),
+                ),
+              ],
+            ),
     );
   }
 }
